@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Mental Health Signal — Student Wellness Analytics</title>
+<meta name="description" content="Predict a student wellness score from daily habits, screen time, and stress — for informational purposes only." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -23,19 +24,24 @@
 
 <main class="layout">
 
-  <!-- FORM PANEL -->
+  <!-- ===================== FORM ===================== -->
   <section class="panel form-panel" aria-labelledby="form-heading">
+    <h2 id="form-heading" class="sr-only">Enter your daily habits</h2>
+
     <form id="predict-form" novalidate>
 
       <fieldset class="group">
-        <legend><span class="legend-index">01</span> Profile</legend>
+        <legend>Profile</legend>
         <div class="grid grid-3">
+
           <div class="field">
             <label for="age">Age</label>
-            <input type="number" id="age" name="age" min="10" max="100" step="1" required placeholder="e.g. 21" />
-            <span class="hint">10–100</span>
-            <span class="error-msg" data-for="age"></span>
+            <input type="number" id="age" name="age" min="10" max="100" step="1" required
+                   placeholder="e.g. 21" aria-describedby="age-hint" />
+            <span class="hint" id="age-hint">10–100</span>
+            <span class="error-msg" data-for="age" role="alert"></span>
           </div>
+
           <div class="field">
             <label for="gender">Gender</label>
             <select id="gender" name="gender" required>
@@ -43,11 +49,13 @@
               <option value="Male">Male</option>
               <option value="Female">Female</option>
             </select>
-            <span class="error-msg" data-for="gender"></span>
+            <span class="error-msg" data-for="gender" role="alert"></span>
           </div>
+
           <div class="field">
             <label for="country">Country</label>
-            <input type="text" id="country" name="country" list="country-list" required placeholder="e.g. India" autocomplete="off" />
+            <input type="text" id="country" name="country" list="country-list" required
+                   placeholder="e.g. India" autocomplete="off" aria-describedby="country-hint" />
             <datalist id="country-list">
               <option value="India"></option>
               <option value="USA"></option>
@@ -59,15 +67,17 @@
               <option value="Turkey"></option>
               <option value="France"></option>
             </datalist>
-            <span class="hint">Not listed? Type it anyway.</span>
-            <span class="error-msg" data-for="country"></span>
+            <span class="hint" id="country-hint">Not listed? Type it anyway.</span>
+            <span class="error-msg" data-for="country" role="alert"></span>
           </div>
+
         </div>
       </fieldset>
 
       <fieldset class="group">
-        <legend><span class="legend-index">02</span> Academic &amp; Digital Habits</legend>
+        <legend>Academic &amp; digital habits</legend>
         <div class="grid grid-2">
+
           <div class="field">
             <label for="academic_level">Academic level</label>
             <select id="academic_level" name="academic_level" required>
@@ -76,8 +86,9 @@
               <option value="Undergraduate">Undergraduate</option>
               <option value="Graduate">Graduate</option>
             </select>
-            <span class="error-msg" data-for="academic_level"></span>
+            <span class="error-msg" data-for="academic_level" role="alert"></span>
           </div>
+
           <div class="field">
             <label for="most_used_platform">Most-used platform</label>
             <select id="most_used_platform" name="most_used_platform" required>
@@ -95,8 +106,9 @@
               <option value="WhatsApp">WhatsApp</option>
               <option value="WeChat">WeChat</option>
             </select>
-            <span class="error-msg" data-for="most_used_platform"></span>
+            <span class="error-msg" data-for="most_used_platform" role="alert"></span>
           </div>
+
           <div class="field">
             <label for="purpose_of_use">Primary purpose</label>
             <select id="purpose_of_use" name="purpose_of_use" required>
@@ -106,66 +118,80 @@
               <option value="Entertainment">Entertainment</option>
               <option value="News">News</option>
             </select>
-            <span class="error-msg" data-for="purpose_of_use"></span>
+            <span class="error-msg" data-for="purpose_of_use" role="alert"></span>
           </div>
+
           <div class="field">
             <label for="avg_daily_usage_hours">Avg. daily screen time</label>
             <div class="unit-input">
-              <input type="number" id="avg_daily_usage_hours" name="avg_daily_usage_hours" min="0" max="24" step="0.1" required placeholder="0.0" />
+              <input type="number" id="avg_daily_usage_hours" name="avg_daily_usage_hours"
+                     min="0" max="24" step="0.1" required placeholder="0.0" />
               <span class="unit">hrs</span>
             </div>
-            <span class="error-msg" data-for="avg_daily_usage_hours"></span>
+            <span class="error-msg" data-for="avg_daily_usage_hours" role="alert"></span>
           </div>
+
           <div class="field">
             <label for="daily_unlocks">Daily phone unlocks</label>
-            <input type="number" id="daily_unlocks" name="daily_unlocks" min="0" step="1" required placeholder="e.g. 60" />
-            <span class="error-msg" data-for="daily_unlocks"></span>
+            <input type="number" id="daily_unlocks" name="daily_unlocks" min="0" step="1"
+                   required placeholder="e.g. 60" />
+            <span class="error-msg" data-for="daily_unlocks" role="alert"></span>
           </div>
+
         </div>
       </fieldset>
 
       <fieldset class="group">
-        <legend><span class="legend-index">03</span> Lifestyle &amp; Stress</legend>
+        <legend>Lifestyle &amp; stress</legend>
         <div class="grid grid-3">
+
           <div class="field">
             <label for="study_hours">Study hours / day</label>
             <div class="unit-input">
-              <input type="number" id="study_hours" name="study_hours" min="0" max="24" step="0.1" required placeholder="0.0" />
+              <input type="number" id="study_hours" name="study_hours" min="0" max="24"
+                     step="0.1" required placeholder="0.0" />
               <span class="unit">hrs</span>
             </div>
-            <span class="error-msg" data-for="study_hours"></span>
+            <span class="error-msg" data-for="study_hours" role="alert"></span>
           </div>
+
           <div class="field">
             <label for="physical_activity_hours">Physical activity / day</label>
             <div class="unit-input">
-              <input type="number" id="physical_activity_hours" name="physical_activity_hours" min="0" max="24" step="0.1" required placeholder="0.0" />
+              <input type="number" id="physical_activity_hours" name="physical_activity_hours"
+                     min="0" max="24" step="0.1" required placeholder="0.0" />
               <span class="unit">hrs</span>
             </div>
-            <span class="error-msg" data-for="physical_activity_hours"></span>
+            <span class="error-msg" data-for="physical_activity_hours" role="alert"></span>
           </div>
+
           <div class="field">
             <label for="sleep_hours_per_night">Sleep / night</label>
             <div class="unit-input">
-              <input type="number" id="sleep_hours_per_night" name="sleep_hours_per_night" min="0" max="24" step="0.1" required placeholder="0.0" />
+              <input type="number" id="sleep_hours_per_night" name="sleep_hours_per_night"
+                     min="0" max="24" step="0.1" required placeholder="0.0" />
               <span class="unit">hrs</span>
             </div>
-            <span class="error-msg" data-for="sleep_hours_per_night"></span>
+            <span class="error-msg" data-for="sleep_hours_per_night" role="alert"></span>
           </div>
+
           <div class="field field-span">
-            <label for="stress_level">Perceived stress level</label>
-            <div class="segmented" id="stress_level_group" data-name="stress_level">
-              <button type="button" class="seg-btn" data-value="Low">Low</button>
-              <button type="button" class="seg-btn" data-value="Medium">Medium</button>
-              <button type="button" class="seg-btn" data-value="High">High</button>
-              <button type="button" class="seg-btn" data-value="Very High">Very High</button>
+            <span class="fake-label" id="stress-label">Perceived stress level</span>
+            <div class="segmented" id="stress_level_group" role="radiogroup" aria-labelledby="stress-label">
+              <button type="button" class="seg-btn" data-value="Low" role="radio" aria-checked="false">Low</button>
+              <button type="button" class="seg-btn" data-value="Medium" role="radio" aria-checked="false">Medium</button>
+              <button type="button" class="seg-btn" data-value="High" role="radio" aria-checked="false">High</button>
+              <button type="button" class="seg-btn" data-value="Very High" role="radio" aria-checked="false">Very High</button>
             </div>
             <input type="hidden" id="stress_level" name="stress_level" required />
-            <span class="error-msg" data-for="stress_level"></span>
+            <span class="error-msg" data-for="stress_level" role="alert"></span>
           </div>
+
         </div>
       </fieldset>
 
       <div class="form-footer">
+        <p class="privacy-note">Nothing you enter is stored or shared.</p>
         <button type="submit" class="submit-btn" id="submit-btn">
           <span class="btn-label">Read my signal</span>
           <span class="btn-spinner" aria-hidden="true"></span>
@@ -174,27 +200,27 @@
     </form>
   </section>
 
-  <!-- RESULT PANEL -->
-  <aside class="panel result-panel" aria-live="polite">
-    <div class="result-inner" id="result-inner">
+  <!-- ===================== RESULT ===================== -->
+  <aside class="panel result-panel">
+    <div class="result-shell" id="result-shell" data-state="idle" aria-live="polite">
 
-      <div class="state state-idle" id="state-idle">
-        <svg class="gauge gauge-idle" viewBox="0 0 240 160" aria-hidden="true">
+      <div class="result-state" data-panel="idle">
+        <svg class="gauge" viewBox="0 0 240 160" aria-hidden="true">
           <path class="gauge-track" d="M 30 140 A 100 100 0 0 1 210 140" />
           <g class="gauge-ticks"></g>
         </svg>
-        <p class="idle-label">Your score will appear here</p>
-        <p class="idle-copy">Fill in the form and submit to generate a predicted mental health score from 0–10.</p>
+        <p class="state-title">Your score will appear here</p>
+        <p class="state-copy">Fill in the form and submit to generate a predicted wellness score from 0–10.</p>
       </div>
 
-      <div class="state state-loading" id="state-loading" hidden>
-        <div class="pulse-ring"></div>
-        <p class="loading-label">Reading the signal…</p>
-        <p class="loading-copy">Running your habits through the model.</p>
+      <div class="result-state" data-panel="loading">
+        <div class="pulse-ring" aria-hidden="true"></div>
+        <p class="state-title">Reading the signal…</p>
+        <p class="state-copy">Running your habits through the model.</p>
       </div>
 
-      <div class="state state-result" id="state-result" hidden>
-        <svg class="gauge gauge-result" viewBox="0 0 240 160" aria-hidden="true">
+      <div class="result-state" data-panel="result">
+        <svg class="gauge" viewBox="0 0 240 160" aria-hidden="true">
           <defs>
             <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stop-color="#D9534F"/>
@@ -212,22 +238,15 @@
           <span class="score-max">/10</span>
         </div>
         <p class="score-band" id="score-band">—</p>
-        <p class="score-context" id="score-context"></p>
-        <button type="button" class="reset-btn" id="reset-btn">Run another read</button>
+        <p class="state-copy" id="score-context"></p>
+        <button type="button" class="ghost-btn" id="reset-btn">Run another read</button>
       </div>
 
-      <div class="state state-error" id="state-error" hidden>
-        <div class="error-icon">!</div>
-        <p class="error-label" id="error-label">
-         Prediction Failed
-        </p>
-        <p class="error-copy" id="error-copy"></p>
-        <button
-         type="button"
-         class="reset-btn"
-         id="error-retry-btn">
-         Try again
-        </button>
+      <div class="result-state" data-panel="error">
+        <div class="error-icon" aria-hidden="true">!</div>
+        <p class="state-title" id="error-label">Prediction failed</p>
+        <p class="state-copy" id="error-copy"></p>
+        <button type="button" class="ghost-btn" id="error-retry-btn">Try again</button>
       </div>
 
     </div>

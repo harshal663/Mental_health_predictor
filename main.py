@@ -12,7 +12,10 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://mental-health-predictor-00.vercel.app/"],
+    allow_origins=[
+        "https://mental-health-predictor-00.vercel.app"
+    ],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
